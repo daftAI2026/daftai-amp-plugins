@@ -67,7 +67,7 @@ Simply tell Amp:
 Shows a notification after each agent turn:
 
 ```
-Usage: Free: $6.14/$10.00 · Balance: $0.79
+Usage: Free: $6.12/$10.00 · Balance: $0.79
 ```
 
 ![usage-monitor notification](./Screenshots/usage-monitor/notification.webp)
