@@ -30,11 +30,11 @@ cd daftai-amp-plugins
 
 # 全局（所有项目）
 mkdir -p ~/.config/amp/plugins
-cp plugins/daftat-usage-monitor/usage-monitor.ts ~/.config/amp/plugins/
+cp plugins/daftai-usage-monitor/usage-monitor.ts ~/.config/amp/plugins/
 
 # 或项目级别（在你的项目根目录下）
 mkdir -p /path/to/your/project/.amp/plugins
-cp plugins/daftat-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plugins/
+cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plugins/
 
 # 3. 启用插件运行 Amp
 PLUGINS=all amp
@@ -60,7 +60,7 @@ PLUGINS=all amp
 
 | 插件 | 描述 |
 |------|------|
-| [usage-monitor](plugins/daftat-usage-monitor/usage-monitor.ts) | 每次 agent 回合结束后，通知显示 Amp 使用额度（免费额度和付费余额） |
+| [usage-monitor](plugins/daftai-usage-monitor/usage-monitor.ts) | 每次 agent 回合结束后，通知显示 Amp 使用额度（免费额度和付费余额） |
 
 ### usage-monitor
 
@@ -84,7 +84,7 @@ daftAI-amp/
 ├── LICENSE
 ├── .gitignore
 └── plugins/
-    └── daftat-usage-monitor/
+    └── daftai-usage-monitor/
         └── usage-monitor.ts
 ```
 

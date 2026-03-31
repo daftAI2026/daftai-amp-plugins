@@ -30,11 +30,11 @@ cd daftai-amp-plugins
 
 # Global (all projects)
 mkdir -p ~/.config/amp/plugins
-cp plugins/daftat-usage-monitor/usage-monitor.ts ~/.config/amp/plugins/
+cp plugins/daftai-usage-monitor/usage-monitor.ts ~/.config/amp/plugins/
 
 # Or project-level (in your project root)
 mkdir -p /path/to/your/project/.amp/plugins
-cp plugins/daftat-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plugins/
+cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plugins/
 
 # 3. Run Amp with plugins enabled
 PLUGINS=all amp
@@ -60,7 +60,7 @@ Simply tell Amp:
 
 | Plugin | Description |
 |--------|-------------|
-| [usage-monitor](plugins/daftat-usage-monitor/usage-monitor.ts) | Displays Amp usage balance (free credits & paid balance) as a notification after each agent turn |
+| [usage-monitor](plugins/daftai-usage-monitor/usage-monitor.ts) | Displays Amp usage balance (free credits & paid balance) as a notification after each agent turn |
 
 ### usage-monitor
 
@@ -84,7 +84,7 @@ daftAI-amp/
 ├── LICENSE
 ├── .gitignore
 └── plugins/
-    └── daftat-usage-monitor/
+    └── daftai-usage-monitor/
         └── usage-monitor.ts
 ```
 
