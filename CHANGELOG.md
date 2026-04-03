@@ -6,7 +6,6 @@ English | [中文](./CHANGELOG.zh.md)
 
 ### Fixed (usage-monitor)
 - Fix negative balance not displayed: when paid credits go negative (e.g. `-$0.05`), the regex now matches the `-$` prefix correctly.
-- Plugin source moved to repo with symlink from `~/.config/amp/plugins/`, establishing single source of truth.
 
 ## 0.0.1 - 2026-03-31
 
