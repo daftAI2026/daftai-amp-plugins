@@ -31,14 +31,14 @@ export default function (amp: PluginAPI) {
       await proc.exited
 
       const freeMatch = output.match(/Amp Free:\s*\$([\d.]+)\/\$([\d.]+)\s*remaining/)
-      const paidMatch = output.match(/Individual credits:\s*\$([\d.]+)\s*remaining/)
+      const paidMatch = output.match(/Individual credits:\s*(-?)\$([\d.]+)\s*remaining/)
 
       const parts: string[] = []
       if (freeMatch) {
         parts.push(`Free: $${freeMatch[1]}/$${freeMatch[2]}`)
       }
       if (paidMatch) {
-        parts.push(`Balance: $${paidMatch[1]}`)
+        parts.push(`Balance: ${paidMatch[1]}$${paidMatch[2]}`)
       }
 
       if (parts.length > 0) {
