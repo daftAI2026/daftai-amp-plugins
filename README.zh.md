@@ -60,17 +60,15 @@ PLUGINS=all amp
 
 | 插件 | 描述 |
 |------|------|
-| [usage-monitor](plugins/daftai-usage-monitor/usage-monitor.ts) | 每次 agent 回合结束后，通知显示 Amp 使用额度（免费额度和付费余额） |
+| [usage-monitor](plugins/daftai-usage-monitor/usage-monitor.ts) | 自动显示 Amp 免费额度及付费余额，并在每次 agent 回合结束后刷新。 |
 
 ### usage-monitor
 
-每次 agent 回合结束后，会看到类似通知：
+启动 Amp 后，你的额度信息会自动显示，并在每次 agent 回合结束后保持刷新。
 
-```
-Usage: Free: $6.12/$10.00 · Balance: $0.79
-```
+让你一目了然地追踪免费额度与付费余额。
 
-![usage-monitor 通知](./Screenshots/usage-monitor/notification.webp)
+![usage-monitor 通知](./Screenshots/usage-monitor/preview.mp4)
 
 
 ## 项目结构

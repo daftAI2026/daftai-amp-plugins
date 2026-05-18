@@ -2,6 +2,13 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 0.0.3 - 2026-05-18
+
+### 更改 (usage-monitor)
+- 从 `ctx.ui.notify` 迁移至最新的 `ctx.ui.status` API。
+- 插件现在会在 Amp CLI 中创建一个常驻状态项。刚加载时显示 `Amp Free: loading...` 并立即拉取最新额度。
+- 在每次 `agent.end` 事件后自动静默刷新同一个状态项，不再发送弹窗通知，体验更加无缝。
+
 ## 0.0.2 - 2026-04-04
 
 ### 修复 (usage-monitor)

@@ -15,7 +15,16 @@ async function initAmpPath() {
 await initAmpPath()
 
 export default function (amp: PluginAPI) {
-  amp.on('agent.end', async (_event, ctx) => {
+  const usageStatus = (() => {
+    try {
+      if (amp.system.executor.kind === 'unknown') return undefined
+      return amp.experimental?.createStatusItem({ text: 'Amp Free: loading...' })
+    } catch {
+      return undefined
+    }
+  })()
+
+  async function refreshUsage(notify?: (text: string) => Promise<void>) {
     try {
       if (!ampPath) return
 
@@ -35,17 +44,29 @@ export default function (amp: PluginAPI) {
 
       const parts: string[] = []
       if (freeMatch) {
-        parts.push(`Free: $${freeMatch[1]}/$${freeMatch[2]}`)
+        parts.push(`Amp Free: $${freeMatch[1]}/$${freeMatch[2].replace(/\.00$/, '')}`)
       }
       if (paidMatch) {
-        parts.push(`Balance: ${paidMatch[1]}$${paidMatch[2]}`)
+        parts.push(`Individual: ${paidMatch[1]}$${paidMatch[2]}`)
       }
 
       if (parts.length > 0) {
-        await ctx.ui.notify('Usage: ' + parts.join(' · '))
+        const text = parts.join(' · ')
+
+        if (usageStatus) {
+          usageStatus.update({ text })
+        } else if (notify) {
+          await notify(text)
+        }
       }
     } catch {
       // silently ignore
     }
+  }
+
+  void refreshUsage()
+
+  amp.on('agent.end', async (_event, ctx) => {
+    await refreshUsage((text) => ctx.ui.notify(text))
   })
 }

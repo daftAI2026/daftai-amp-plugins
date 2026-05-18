@@ -60,17 +60,15 @@ Simply tell Amp:
 
 | Plugin | Description |
 |--------|-------------|
-| [usage-monitor](plugins/daftai-usage-monitor/usage-monitor.ts) | Displays Amp usage balance (free credits & paid balance) as a notification after each agent turn |
+| [usage-monitor](plugins/daftai-usage-monitor/usage-monitor.ts) | Displays your Amp free credits and paid balance automatically, then refreshes after every agent turn.|
 
 ### usage-monitor
 
-Shows a notification after each agent turn:
+When Amp starts, your usage now appears automatically and keeps refreshing after every agent turn.
 
-```
-Usage: Free: $6.12/$10.00 · Balance: $0.79
-```
+Track your free credits & paid balance in one glance.
 
-![usage-monitor notification](./Screenshots/usage-monitor/notification.webp)
+![usage-monitor notification](./Screenshots/usage-monitor/preview.mp4)
 
 
 ## Project Structure
