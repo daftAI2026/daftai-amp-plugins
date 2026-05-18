@@ -68,7 +68,7 @@ PLUGINS=all amp
 
 让你一目了然地追踪免费额度与付费余额。
 
-![usage-monitor 通知](./Screenshots/usage-monitor/preview.mp4)
+<video src="./Screenshots/usage-monitor/preview.mp4" controls muted width="100%"></video>
 
 
 ## 项目结构

@@ -68,7 +68,7 @@ When Amp starts, your usage now appears automatically and keeps refreshing after
 
 Track your free credits & paid balance in one glance.
 
-![usage-monitor notification](./Screenshots/usage-monitor/preview.mp4)
+<video src="./Screenshots/usage-monitor/preview.mp4" controls muted width="100%"></video>
 
 
 ## Project Structure
