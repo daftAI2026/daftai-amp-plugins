@@ -68,7 +68,7 @@ PLUGINS=all amp
 
 让你一目了然地追踪免费额度与付费余额。
 
-<video src="https://github.com/daftAI2026/daftai-amp-plugins/raw/master/assets/usage-monitor/preview.mp4" controls muted width="100%"></video>
+https://github.com/user-attachments/assets/74b5bba6-57a3-4a3d-ad23-2b194b356b6e
 
 
 ## 项目结构
