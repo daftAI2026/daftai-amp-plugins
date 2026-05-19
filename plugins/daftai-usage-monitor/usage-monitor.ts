@@ -47,7 +47,7 @@ export default function (amp: PluginAPI) {
         parts.push(`Amp Free: $${freeMatch[1]}/$${freeMatch[2].replace(/\.00$/, '')}`)
       }
       if (paidMatch) {
-        parts.push(`Individual: ${paidMatch[1]}$${paidMatch[2]}`)
+        parts.push(`Credits: ${paidMatch[1]}$${paidMatch[2]}`)
       }
 
       if (parts.length > 0) {

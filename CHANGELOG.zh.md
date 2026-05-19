@@ -2,6 +2,11 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 0.0.4 - 2026-05-19
+
+### 更改 (usage-monitor)
+- 将常驻状态项中的付费余额标签从 `Individual` 改为 `Credits`。
+
 ## 0.0.3 - 2026-05-18
 
 ### 更改 (usage-monitor)

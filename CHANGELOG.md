@@ -2,6 +2,11 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 0.0.4 - 2026-05-19
+
+### Changed (usage-monitor)
+- Renamed the paid balance label from `Individual` to `Credits` in the persistent status item.
+
 ## 0.0.3 - 2026-05-18
 
 ### Changed (usage-monitor)
