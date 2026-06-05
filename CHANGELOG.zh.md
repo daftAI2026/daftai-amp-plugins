@@ -2,6 +2,16 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 0.0.5 - 2026-06-06
+
+### 更改 (usage-monitor)
+- 按当前 Amp 插件手册更新安装、查看与重载说明。
+- 补充当前项目插件、系统插件与 Windows 插件目录说明。
+- 将首次额度刷新从插件加载阶段移动到 `session.start`。
+
+### 修复 (usage-monitor)
+- 在 Windows 上使用 `where.exe` 检测 `amp` 二进制，替代仅适用于 Unix 的 `which`。
+
 ## 0.0.4 - 2026-05-19
 
 ### 更改 (usage-monitor)
@@ -10,7 +20,7 @@
 ## 0.0.3 - 2026-05-18
 
 ### 更改 (usage-monitor)
-- 从 `ctx.ui.notify` 迁移至最新的 `ctx.ui.status` API。
+- 从 `ctx.ui.notify` 迁移至实验性的 `amp.experimental.createStatusItem` API。
 - 插件现在会在 Amp CLI 中创建一个常驻状态项。刚加载时显示 `Amp Free: loading...` 并立即拉取最新额度。
 - 在每次 `agent.end` 事件后自动静默刷新同一个状态项，不再发送弹窗通知，体验更加无缝。
 

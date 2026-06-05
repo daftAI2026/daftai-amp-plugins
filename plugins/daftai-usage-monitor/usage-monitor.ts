@@ -2,30 +2,44 @@
 import type { PluginAPI } from '@ampcode/plugin'
 
 let ampPath: string | null = null
+let ampPathInit: Promise<void> | null = null
 
 async function initAmpPath() {
   const env = { ...process.env }
   delete env.BUN_BE_BUN
-  
-  const which = Bun.spawn(['which', 'amp'], { stdout: 'pipe', env })
-  ampPath = (await new Response(which.stdout).text()).trim() || null
-  await which.exited
+
+  const finder = process.platform === 'win32' ? ['where.exe', 'amp'] : ['which', 'amp']
+  const proc = Bun.spawn(finder, { stdout: 'pipe', stderr: 'pipe', env })
+  const output = await new Response(proc.stdout).text()
+  await proc.exited
+
+  ampPath = output.split(/\r?\n/).map((line) => line.trim()).find(Boolean) || null
 }
 
-await initAmpPath()
+function ensureAmpPath() {
+  ampPathInit ??= initAmpPath()
+  return ampPathInit
+}
 
 export default function (amp: PluginAPI) {
-  const usageStatus = (() => {
+  let usageStatus: { update(value: { text: string }): void } | undefined
+
+  function getUsageStatus() {
+    if (usageStatus) return usageStatus
+
     try {
       if (amp.system.executor.kind === 'unknown') return undefined
-      return amp.experimental?.createStatusItem({ text: 'Amp Free: loading...' })
+      usageStatus = amp.experimental?.createStatusItem({ text: 'Amp Free: loading...' })
     } catch {
       return undefined
     }
-  })()
+
+    return usageStatus
+  }
 
   async function refreshUsage(notify?: (text: string) => Promise<void>) {
     try {
+      await ensureAmpPath()
       if (!ampPath) return
 
       const env = { ...process.env }
@@ -52,9 +66,10 @@ export default function (amp: PluginAPI) {
 
       if (parts.length > 0) {
         const text = parts.join(' · ')
+        const status = getUsageStatus()
 
-        if (usageStatus) {
-          usageStatus.update({ text })
+        if (status) {
+          status.update({ text })
         } else if (notify) {
           await notify(text)
         }
@@ -64,7 +79,9 @@ export default function (amp: PluginAPI) {
     }
   }
 
-  void refreshUsage()
+  amp.on('session.start', async () => {
+    await refreshUsage()
+  })
 
   amp.on('agent.end', async (_event, ctx) => {
     await refreshUsage((text) => ctx.ui.notify(text))

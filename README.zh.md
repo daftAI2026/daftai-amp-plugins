@@ -28,17 +28,17 @@ cd daftai-amp-plugins
 
 # 2. 复制插件到 Amp 插件目录
 
-# 全局（所有项目）
+# macOS/Linux 系统插件（所有项目）
 mkdir -p ~/.config/amp/plugins
 cp plugins/daftai-usage-monitor/usage-monitor.ts ~/.config/amp/plugins/
 
-# 或项目级别（在你的项目根目录下）
+# 项目插件（在你的项目根目录下执行）
 mkdir -p /path/to/your/project/.amp/plugins
 cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plugins/
-
-# 3. 启用插件运行 Amp
-PLUGINS=all amp
 ```
+
+Windows 系统插件目录为 `%USERPROFILE%\.config\amp\plugins\*.ts`。
+项目插件目录为 `.amp/plugins/*.ts`。
 
 ### 方式二：让 Agent 帮你装
 
@@ -48,12 +48,13 @@ PLUGINS=all amp
 
 ## 开始使用
 
-1. 启用插件运行 Amp：
+1. 启动 Amp：
    ```bash
-   PLUGINS=all amp
+   amp
    ```
 2. 发送任意提示词，已安装的插件会自动生效。
-3. 修改插件后，按 `Ctrl-o` 选择 `plugins: reload` 重新加载。
+3. 查看插件时，按 `Ctrl-o` 选择 `plugins: list`。
+4. 修改插件后，按 `Ctrl-o` 选择 `plugins: reload` 重新加载。
 
 
 ## 可用插件
@@ -64,7 +65,7 @@ PLUGINS=all amp
 
 ### usage-monitor
 
-启动 Amp 后，你的额度信息会自动显示，并在每次 agent 回合结束后保持刷新。
+Amp 线程会话开始后，你的额度信息会自动显示，并在每次 agent 回合结束后保持刷新。
 
 让你一目了然地追踪免费额度与付费余额。
 
@@ -81,6 +82,9 @@ daftAI-amp/
 ├── CHANGELOG.zh.md
 ├── LICENSE
 ├── .gitignore
+├── assets/
+│   └── usage-monitor/
+│       └── preview.mp4
 └── plugins/
     └── daftai-usage-monitor/
         └── usage-monitor.ts

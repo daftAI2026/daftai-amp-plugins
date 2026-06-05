@@ -26,19 +26,19 @@ Amp plugins shared by daftAI for enhancing the [Amp](https://ampcode.com) CLI ex
 git clone https://github.com/daftAI2026/daftai-amp-plugins.git
 cd daftai-amp-plugins
 
-# 2. Copy plugin to Amp plugins directory
+# 2. Copy plugin to an Amp plugin directory
 
-# Global (all projects)
+# System plugin on macOS/Linux (all projects)
 mkdir -p ~/.config/amp/plugins
 cp plugins/daftai-usage-monitor/usage-monitor.ts ~/.config/amp/plugins/
 
-# Or project-level (in your project root)
+# Project plugin (run from your project root)
 mkdir -p /path/to/your/project/.amp/plugins
 cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plugins/
-
-# 3. Run Amp with plugins enabled
-PLUGINS=all amp
 ```
+
+Windows system plugins live in `%USERPROFILE%\.config\amp\plugins\*.ts`.
+Project plugins live in `.amp/plugins/*.ts`.
 
 ### Option 2: Ask the Agent
 
@@ -48,12 +48,13 @@ Simply tell Amp:
 
 ## Getting Started
 
-1. Start Amp with plugins enabled:
+1. Start Amp:
    ```bash
-   PLUGINS=all amp
+   amp
    ```
 2. Send any prompt — installed plugins will activate automatically.
-3. To reload plugins after changes, press `Ctrl-o` and select `plugins: reload`.
+3. To inspect plugins, press `Ctrl-o` and select `plugins: list`.
+4. To reload plugins after changes, press `Ctrl-o` and select `plugins: reload`.
 
 
 ## Available Plugins
@@ -64,7 +65,7 @@ Simply tell Amp:
 
 ### usage-monitor
 
-When Amp starts, your usage now appears automatically and keeps refreshing after every agent turn.
+When an Amp thread session starts, your usage appears automatically and keeps refreshing after every agent turn.
 
 Track your free credits & paid balance in one glance.
 
@@ -81,6 +82,9 @@ daftAI-amp/
 ├── CHANGELOG.zh.md
 ├── LICENSE
 ├── .gitignore
+├── assets/
+│   └── usage-monitor/
+│       └── preview.mp4
 └── plugins/
     └── daftai-usage-monitor/
         └── usage-monitor.ts
