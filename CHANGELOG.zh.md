@@ -7,10 +7,12 @@
 ### 更改 (usage-monitor)
 - 按当前 Amp 插件手册更新安装、查看与重载说明。
 - 补充当前项目插件、系统插件与 Windows 插件目录说明。
-- 将首次额度刷新从插件加载阶段移动到 `session.start`。
+- 增加 Windows PowerShell 安装示例。
+- 在 Windows 上将首次额度刷新延后到插件启动完成后执行，避免状态项加载前运行 `amp usage` 导致启动超时。
 
 ### 修复 (usage-monitor)
 - 在 Windows 上使用 `where.exe` 检测 `amp` 二进制，替代仅适用于 Unix 的 `which`。
+- 子进程执行 `amp usage` 时使用 `PLUGINS=none`，避免递归加载 usage-monitor 插件。
 
 ## 0.0.4 - 2026-05-19
 

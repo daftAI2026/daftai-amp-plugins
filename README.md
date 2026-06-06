@@ -19,32 +19,43 @@ Amp plugins shared by daftAI for enhancing the [Amp](https://ampcode.com) CLI ex
 
 ## Installation
 
-### Option 1: Manual Install
-
-```bash
-# 1. Clone the repo
-git clone https://github.com/daftAI2026/daftai-amp-plugins.git
-cd daftai-amp-plugins
-
-# 2. Copy plugin to an Amp plugin directory
-
-# System plugin on macOS/Linux (all projects)
-mkdir -p ~/.config/amp/plugins
-cp plugins/daftai-usage-monitor/usage-monitor.ts ~/.config/amp/plugins/
-
-# Project plugin (run from your project root)
-mkdir -p /path/to/your/project/.amp/plugins
-cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plugins/
-```
-
-Windows system plugins live in `%USERPROFILE%\.config\amp\plugins\*.ts`.
-Project plugins live in `.amp/plugins/*.ts`.
-
-### Option 2: Ask the Agent
+### Option 1: Ask the Agent
 
 Simply tell Amp:
 
 > Please install plugins from github.com/daftAI2026/daftai-amp-plugins
+
+### Option 2: Manual Install
+
+Clone the repository first:
+
+```bash
+git clone https://github.com/daftAI2026/daftai-amp-plugins.git
+cd daftai-amp-plugins
+```
+
+Then copy the plugin to one Amp plugin directory.
+
+System plugin on macOS/Linux (all projects):
+
+```bash
+mkdir -p ~/.config/amp/plugins
+cp plugins/daftai-usage-monitor/usage-monitor.ts ~/.config/amp/plugins/
+```
+
+System plugin on Windows PowerShell (all projects):
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\amp\plugins"
+Copy-Item plugins/daftai-usage-monitor/usage-monitor.ts "$env:USERPROFILE\.config\amp\plugins\usage-monitor.ts"
+```
+
+Project plugin (run from your project root):
+
+```bash
+mkdir -p /path/to/your/project/.amp/plugins
+cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plugins/
+```
 
 ## Getting Started
 
@@ -65,7 +76,7 @@ Simply tell Amp:
 
 ### usage-monitor
 
-When an Amp thread session starts, your usage appears automatically and keeps refreshing after every agent turn.
+Supports macOS, Linux, and Windows. When the plugin loads, your usage appears automatically in supported Amp status-item surfaces and keeps refreshing after every agent turn. If status items are unavailable, the plugin falls back to a notification after agent turns.
 
 Track your free credits & paid balance in one glance.
 
