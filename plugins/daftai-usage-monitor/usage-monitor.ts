@@ -2,17 +2,27 @@
 import type { PluginAPI } from '@ampcode/plugin'
 
 let ampPath: string | null = null
+let ampPathInit: Promise<void> | null = null
 
 async function initAmpPath() {
   const env = { ...process.env }
   delete env.BUN_BE_BUN
   
-  const which = Bun.spawn(['which', 'amp'], { stdout: 'pipe', env })
-  ampPath = (await new Response(which.stdout).text()).trim() || null
+  const finder = process.platform === 'win32' ? ['where.exe', 'amp'] : ['which', 'amp']
+  const which = Bun.spawn(finder, { stdout: 'pipe', stderr: 'pipe', env })
+  const output = await new Response(which.stdout).text()
+  ampPath = output.split(/\r?\n/).map((line) => line.trim()).find(Boolean) || null
   await which.exited
 }
 
-await initAmpPath()
+if (process.platform !== 'win32') {
+  await initAmpPath()
+}
+
+function ensureAmpPath() {
+  ampPathInit ??= initAmpPath()
+  return ampPathInit
+}
 
 export default function (amp: PluginAPI) {
   const usageStatus = (() => {
@@ -26,10 +36,14 @@ export default function (amp: PluginAPI) {
 
   async function refreshUsage(notify?: (text: string) => Promise<void>) {
     try {
+      if (!ampPath) {
+        await ensureAmpPath()
+      }
       if (!ampPath) return
 
       const env = { ...process.env }
       delete env.BUN_BE_BUN
+      env.PLUGINS = 'none'
 
       const proc = Bun.spawn([ampPath, 'usage'], {
         stdout: 'pipe',
@@ -64,7 +78,11 @@ export default function (amp: PluginAPI) {
     }
   }
 
-  void refreshUsage()
+  if (process.platform === 'win32') {
+    setTimeout(() => void refreshUsage(), 0)
+  } else {
+    void refreshUsage()
+  }
 
   amp.on('agent.end', async (_event, ctx) => {
     await refreshUsage((text) => ctx.ui.notify(text))

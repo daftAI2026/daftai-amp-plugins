@@ -19,41 +19,53 @@ daftAI 分享的 [Amp](https://ampcode.com) CLI 插件，提升 Amp 使用体验
 
 ## 安装
 
-### 方式一：手动安装
-
-```bash
-# 1. 克隆仓库
-git clone https://github.com/daftAI2026/daftai-amp-plugins.git
-cd daftai-amp-plugins
-
-# 2. 复制插件到 Amp 插件目录
-
-# 全局（所有项目）
-mkdir -p ~/.config/amp/plugins
-cp plugins/daftai-usage-monitor/usage-monitor.ts ~/.config/amp/plugins/
-
-# 或项目级别（在你的项目根目录下）
-mkdir -p /path/to/your/project/.amp/plugins
-cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plugins/
-
-# 3. 启用插件运行 Amp
-PLUGINS=all amp
-```
-
-### 方式二：让 Agent 帮你装
+### 方式一：让 Agent 帮你装
 
 直接告诉 Amp：
 
 > Please install plugins from github.com/daftAI2026/daftai-amp-plugins
 
+### 方式二：手动安装
+
+先克隆仓库：
+
+```bash
+git clone https://github.com/daftAI2026/daftai-amp-plugins.git
+cd daftai-amp-plugins
+```
+
+然后将插件复制到一个 Amp 插件目录。
+
+macOS/Linux 系统插件（所有项目）：
+
+```bash
+mkdir -p ~/.config/amp/plugins
+cp plugins/daftai-usage-monitor/usage-monitor.ts ~/.config/amp/plugins/
+```
+
+Windows PowerShell 系统插件（所有项目）：
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\amp\plugins"
+Copy-Item plugins/daftai-usage-monitor/usage-monitor.ts "$env:USERPROFILE\.config\amp\plugins\usage-monitor.ts"
+```
+
+项目插件（在你的项目根目录下执行）：
+
+```bash
+mkdir -p /path/to/your/project/.amp/plugins
+cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plugins/
+```
+
 ## 开始使用
 
-1. 启用插件运行 Amp：
+1. 启动 Amp：
    ```bash
-   PLUGINS=all amp
+   amp
    ```
 2. 发送任意提示词，已安装的插件会自动生效。
-3. 修改插件后，按 `Ctrl-o` 选择 `plugins: reload` 重新加载。
+3. 查看插件时，按 `Ctrl-o` 选择 `plugins: list`。
+4. 修改插件后，按 `Ctrl-o` 选择 `plugins: reload` 重新加载。
 
 
 ## 可用插件
@@ -64,7 +76,7 @@ PLUGINS=all amp
 
 ### usage-monitor
 
-启动 Amp 后，你的额度信息会自动显示，并在每次 agent 回合结束后保持刷新。
+支持 macOS、Linux 和 Windows。插件加载后，你的额度信息会自动显示在支持状态项的 Amp 界面中，并在每次 agent 回合结束后保持刷新。如果当前界面不支持状态项，插件会在 agent 回合结束后回退为通知显示。
 
 让你一目了然地追踪免费额度与付费余额。
 
@@ -81,6 +93,9 @@ daftAI-amp/
 ├── CHANGELOG.zh.md
 ├── LICENSE
 ├── .gitignore
+├── assets/
+│   └── usage-monitor/
+│       └── preview.mp4
 └── plugins/
     └── daftai-usage-monitor/
         └── usage-monitor.ts
