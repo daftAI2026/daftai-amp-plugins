@@ -7,13 +7,16 @@ let ampPathInit: Promise<void> | null = null
 async function initAmpPath() {
   const env = { ...process.env }
   delete env.BUN_BE_BUN
-
+  
   const finder = process.platform === 'win32' ? ['where.exe', 'amp'] : ['which', 'amp']
-  const proc = Bun.spawn(finder, { stdout: 'pipe', stderr: 'pipe', env })
-  const output = await new Response(proc.stdout).text()
-  await proc.exited
-
+  const which = Bun.spawn(finder, { stdout: 'pipe', stderr: 'pipe', env })
+  const output = await new Response(which.stdout).text()
   ampPath = output.split(/\r?\n/).map((line) => line.trim()).find(Boolean) || null
+  await which.exited
+}
+
+if (process.platform !== 'win32') {
+  await initAmpPath()
 }
 
 function ensureAmpPath() {
@@ -22,28 +25,25 @@ function ensureAmpPath() {
 }
 
 export default function (amp: PluginAPI) {
-  let usageStatus: { update(value: { text: string }): void } | undefined
-
-  function getUsageStatus() {
-    if (usageStatus) return usageStatus
-
+  const usageStatus = (() => {
     try {
       if (amp.system.executor.kind === 'unknown') return undefined
-      usageStatus = amp.experimental?.createStatusItem({ text: 'Amp Free: loading...' })
+      return amp.experimental?.createStatusItem({ text: 'Amp Free: loading...' })
     } catch {
       return undefined
     }
-
-    return usageStatus
-  }
+  })()
 
   async function refreshUsage(notify?: (text: string) => Promise<void>) {
     try {
-      await ensureAmpPath()
+      if (!ampPath) {
+        await ensureAmpPath()
+      }
       if (!ampPath) return
 
       const env = { ...process.env }
       delete env.BUN_BE_BUN
+      env.PLUGINS = 'none'
 
       const proc = Bun.spawn([ampPath, 'usage'], {
         stdout: 'pipe',
@@ -66,10 +66,9 @@ export default function (amp: PluginAPI) {
 
       if (parts.length > 0) {
         const text = parts.join(' · ')
-        const status = getUsageStatus()
 
-        if (status) {
-          status.update({ text })
+        if (usageStatus) {
+          usageStatus.update({ text })
         } else if (notify) {
           await notify(text)
         }
@@ -79,9 +78,11 @@ export default function (amp: PluginAPI) {
     }
   }
 
-  amp.on('session.start', async () => {
-    await refreshUsage()
-  })
+  if (process.platform === 'win32') {
+    setTimeout(() => void refreshUsage(), 0)
+  } else {
+    void refreshUsage()
+  }
 
   amp.on('agent.end', async (_event, ctx) => {
     await refreshUsage((text) => ctx.ui.notify(text))
