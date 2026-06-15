@@ -2,6 +2,12 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 0.0.6 - 2026-06-15
+
+### Fixed (usage-monitor)
+- Avoid blocking plugin startup while resolving the `amp` binary path; the first usage refresh now runs after registration so slow local PATH lookup or network/API errors cannot prevent the plugin from becoming ready.
+- Ignore failed `amp usage` subprocess exits instead of parsing incomplete output.
+
 ## 0.0.5 - 2026-06-06
 
 ### Changed (usage-monitor)
