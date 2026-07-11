@@ -64,8 +64,8 @@ cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plug
    amp
    ```
 2. 发送任意提示词，已安装的插件会自动生效。
-3. 查看插件时，按 `Ctrl-O` 选择 `plugins: list`。
-4. 修改插件后，按 `Ctrl-O` 选择 `plugins: reload` 重新加载。
+3. 查看插件时，按 `Ctrl-o` 选择 `plugins: list`。
+4. 修改插件后，按 `Ctrl-o` 选择 `plugins: reload` 重新加载。
 
 
 ## 可用插件
