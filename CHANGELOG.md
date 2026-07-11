@@ -2,6 +2,13 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 0.0.7 - 2026-07-12
+
+### Changed (usage-monitor)
+- Adapted to the new `amp usage` output format where Amp Free is reported as a daily percentage (e.g. `57% remaining today`) instead of a dollar amount (`$x/$y remaining`).
+- The status item now displays `Free: 57%` for the new format while retaining backward compatibility with the older `$x/$y` format.
+- Trailing settings URLs appended by newer Amp versions are gracefully ignored.
+
 ## 0.0.6 - 2026-06-15
 
 ### Fixed (usage-monitor)

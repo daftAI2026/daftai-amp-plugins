@@ -2,6 +2,13 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 0.0.7 - 2026-07-12
+
+### 更改 (usage-monitor)
+- 适配 `amp usage` 新输出格式：免费额度从金额（`$x/$y remaining`）改为每日百分比（如 `57% remaining today`）。
+- 状态栏对新格式显示 `Free: 57%`，同时保留对旧版 `$x/$y` 格式的向后兼容。
+- 新版 Amp 在每行末尾追加的设置页 URL 被优雅忽略，不影响解析。
+
 ## 0.0.6 - 2026-06-15
 
 ### 修复 (usage-monitor)

@@ -33,7 +33,7 @@ export default function (amp: PluginAPI) {
   const usageStatus = (() => {
     try {
       if (amp.system.executor.kind === 'unknown') return undefined
-      return amp.experimental?.createStatusItem({ text: 'Amp Free: loading...' })
+      return amp.experimental?.createStatusItem({ text: 'Free: loading...' })
     } catch {
       return undefined
     }
@@ -62,12 +62,19 @@ export default function (amp: PluginAPI) {
         return
       }
 
-      const freeMatch = output.match(/Amp Free:\s*\$([\d.]+)\/\$([\d.]+)\s*remaining/)
+      // 新格式: "Amp Free: 57% remaining today (resets daily) - https://..."
+      // 旧格式: "Amp Free: $0.57/$1.00 remaining"
+      const freePercentMatch = output.match(/Amp Free:\s*(\d+)%\s*remaining\s*today/)
+      const freeAmountMatch = !freePercentMatch
+        ? output.match(/Amp Free:\s*\$([\d.]+)\/\$([\d.]+)\s*remaining/)
+        : null
       const paidMatch = output.match(/Individual credits:\s*(-?)\$([\d.]+)\s*remaining/)
 
       const parts: string[] = []
-      if (freeMatch) {
-        parts.push(`Amp Free: $${freeMatch[1]}/$${freeMatch[2].replace(/\.00$/, '')}`)
+      if (freePercentMatch) {
+        parts.push(`Free: ${freePercentMatch[1]}%`)
+      } else if (freeAmountMatch) {
+        parts.push(`Free: $${freeAmountMatch[1]}/$${freeAmountMatch[2].replace(/\.00$/, '')}`)
       }
       if (paidMatch) {
         parts.push(`Credits: ${paidMatch[1]}$${paidMatch[2]}`)
