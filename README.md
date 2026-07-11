@@ -64,8 +64,8 @@ cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plug
    amp
    ```
 2. Send any prompt — installed plugins will activate automatically.
-3. To inspect plugins, press `Ctrl-o` and select `plugins: list`.
-4. To reload plugins after changes, press `Ctrl-o` and select `plugins: reload`.
+3. To inspect plugins, press `Ctrl-O` and select `plugins: list`.
+4. To reload plugins after changes, press `Ctrl-O` and select `plugins: reload`.
 
 
 ## Available Plugins
