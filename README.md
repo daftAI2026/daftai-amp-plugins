@@ -80,7 +80,7 @@ Supports macOS, Linux, and Windows. When the plugin loads, your usage appears au
 
 Track your free credits & paid balance in one glance.
 
-https://github.com/user-attachments/assets/3f4e72f9-7ec7-4ea9-9626-66b9cc202ede
+https://github.com/user-attachments/assets/c0072157-419c-49d9-825c-abd9939fc9ef
 
 
 ## Project Structure

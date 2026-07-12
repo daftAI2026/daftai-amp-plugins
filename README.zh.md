@@ -80,7 +80,7 @@ cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plug
 
 让你一目了然地追踪免费额度与付费余额。
 
-https://github.com/user-attachments/assets/3f4e72f9-7ec7-4ea9-9626-66b9cc202ede
+https://github.com/user-attachments/assets/c0072157-419c-49d9-825c-abd9939fc9ef
 
 
 ## 项目结构
