@@ -1,6 +1,8 @@
 // @i-know-the-amp-plugin-api-is-wip-and-very-experimental-right-now
 import type { PluginAPI } from '@ampcode/plugin'
 
+export const description = 'Shows remaining Amp usage in the status bar'
+
 let ampPath: string | null = null
 let ampPathInit: Promise<string | null> | null = null
 
@@ -33,7 +35,7 @@ export default function (amp: PluginAPI) {
   const usageStatus = (() => {
     try {
       if (amp.system.executor.kind === 'unknown') return undefined
-      return amp.experimental?.createStatusItem({ text: 'Free: loading...' })
+      return amp.experimental?.createStatusItem({ text: 'Usage: loading...' })
     } catch {
       return undefined
     }
@@ -62,8 +64,12 @@ export default function (amp: PluginAPI) {
         return
       }
 
-      // 新格式: "Amp Free: 57% remaining today (resets daily) - https://..."
+      // 订阅格式: "Amp Megawatt Subscription: 95% other usage and 100% orb usage remaining"
+      // 免费格式: "Amp Free: 57% remaining today (resets daily) - https://..."
       // 旧格式: "Amp Free: $0.57/$1.00 remaining"
+      const subscriptionMatch = output.match(
+        /Amp\s+(.+?)\s+Subscription:\**\s*(\d+)%\s*other usage\s+and\s+(\d+)%\s*orb usage\s+remaining/i,
+      )
       const freePercentMatch = output.match(/Amp Free:\s*(\d+)%\s*remaining\s*today/)
       const freeAmountMatch = !freePercentMatch
         ? output.match(/Amp Free:\s*\$([\d.]+)\/\$([\d.]+)\s*remaining/)
@@ -71,7 +77,11 @@ export default function (amp: PluginAPI) {
       const paidMatch = output.match(/Individual credits:\s*(-?)\$([\d.]+)\s*remaining/)
 
       const parts: string[] = []
-      if (freePercentMatch) {
+      if (subscriptionMatch) {
+        parts.push(subscriptionMatch[1])
+        parts.push(`Other: ${subscriptionMatch[2]}%`)
+        parts.push(`Orb: ${subscriptionMatch[3]}%`)
+      } else if (freePercentMatch) {
         parts.push(`Free: ${freePercentMatch[1]}%`)
       } else if (freeAmountMatch) {
         parts.push(`Free: $${freeAmountMatch[1]}/$${freeAmountMatch[2].replace(/\.00$/, '')}`)

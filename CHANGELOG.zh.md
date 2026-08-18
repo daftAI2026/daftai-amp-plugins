@@ -2,6 +2,13 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 0.0.8 - 2026-08-18
+
+### 更改 (usage-monitor)
+- 新增对订阅版 `amp usage` 输出的支持，可分别显示 Other 与 Orb 两个额度池。
+- 状态栏现在会显示识别到的套餐名称，例如 `Megawatt · Other: 95% · Orb: 100%`。
+- 保留对旧版 Amp Free 与付费余额输出格式的兼容。
+
 ## 0.0.7 - 2026-07-12
 
 ### 更改 (usage-monitor)

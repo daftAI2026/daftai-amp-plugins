@@ -2,6 +2,13 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 0.0.8 - 2026-08-18
+
+### Changed (usage-monitor)
+- Added support for subscription-based `amp usage` output with separate Other and Orb usage pools.
+- The status item now includes the detected plan name, for example `Megawatt · Other: 95% · Orb: 100%`.
+- Retained compatibility with older Amp Free and paid credit output formats.
+
 ## 0.0.7 - 2026-07-12
 
 ### Changed (usage-monitor)
