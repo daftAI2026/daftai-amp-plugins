@@ -80,7 +80,7 @@ Supports macOS, Linux, and Windows. When the plugin loads, your usage appears au
 
 Subscription output includes the plan name and both usage pools, for example `Megawatt · Other: 95% · Orb: 100%`. Older Amp Free percentage, dollar allowance, and paid credit formats remain supported.
 
-https://github.com/user-attachments/assets/c0072157-419c-49d9-825c-abd9939fc9ef
+https://github.com/user-attachments/assets/873bd095-b9c2-4c39-94f7-02749837babb
 
 
 ## Project Structure

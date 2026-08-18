@@ -80,7 +80,7 @@ cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plug
 
 订阅用户会看到套餐名称及两个额度池，例如 `Megawatt · Other: 95% · Orb: 100%`。插件仍兼容旧版 Amp Free 百分比、金额额度及付费余额格式。
 
-https://github.com/user-attachments/assets/c0072157-419c-49d9-825c-abd9939fc9ef
+https://github.com/user-attachments/assets/873bd095-b9c2-4c39-94f7-02749837babb
 
 
 ## 项目结构
