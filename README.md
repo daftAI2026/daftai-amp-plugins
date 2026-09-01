@@ -72,13 +72,13 @@ cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plug
 
 | Plugin | Description |
 |--------|-------------|
-| [usage-monitor](plugins/daftai-usage-monitor/usage-monitor.ts) | Displays your Amp subscription plan and remaining Other/Orb usage automatically, then refreshes after every agent turn. |
+| [usage-monitor](plugins/daftai-usage-monitor/usage-monitor.ts) | Displays your Amp subscription plan and remaining Agent/Orb usage automatically, then refreshes after every agent turn. |
 
 ### usage-monitor
 
 Supports macOS, Linux, and Windows. When the plugin loads, your usage appears automatically in supported Amp status-item surfaces and keeps refreshing after every agent turn. If status items are unavailable, the plugin falls back to a notification after agent turns.
 
-Subscription output includes the plan name and both usage pools, for example `Megawatt · Other: 95% · Orb: 100%`. Older Amp Free percentage, dollar allowance, and paid credit formats remain supported.
+Subscription output includes the plan name and both usage pools, for example `Megawatt · Agent: 95% · Orb: 100%`. Older subscription, Amp Free percentage, dollar allowance, and paid credit formats remain supported.
 
 https://github.com/user-attachments/assets/873bd095-b9c2-4c39-94f7-02749837babb
 

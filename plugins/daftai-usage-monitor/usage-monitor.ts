@@ -64,23 +64,31 @@ export default function (amp: PluginAPI) {
         return
       }
 
-      // 订阅格式: "Amp Megawatt Subscription: 95% other usage and 100% orb usage remaining"
+      const plainOutput = output.replaceAll('**', '')
+
+      // 新订阅格式: "Amp Megawatt Subscription: agent usage $19.59 of $20 remaining (98%), orb usage ... (100%)"
+      // 旧订阅格式: "Amp Megawatt Subscription: 95% other usage and 100% orb usage remaining"
       // 免费格式: "Amp Free: 57% remaining today (resets daily) - https://..."
       // 旧格式: "Amp Free: $0.57/$1.00 remaining"
-      const subscriptionMatch = output.match(
-        /Amp\s+(.+?)\s+Subscription:\**\s*(\d+)%\s*other usage\s+and\s+(\d+)%\s*orb usage\s+remaining/i,
+      const subscriptionMatch = plainOutput.match(/Amp\s+(.+?)\s+Subscription:/i)
+      const subscriptionUsageMatch = plainOutput.match(
+        /agent usage[^\r\n]*?\((\d+)%\),?\s*orb usage[^\r\n]*?\((\d+)%\)/i,
       )
-      const freePercentMatch = output.match(/Amp Free:\s*(\d+)%\s*remaining\s*today/)
+      const legacySubscriptionUsageMatch = plainOutput.match(
+        /(\d+)%\s*other usage\s+and\s+(\d+)%\s*orb usage\s+remaining/i,
+      )
+      const freePercentMatch = plainOutput.match(/Amp Free:\s*(\d+)%\s*remaining\s*today/)
       const freeAmountMatch = !freePercentMatch
-        ? output.match(/Amp Free:\s*\$([\d.]+)\/\$([\d.]+)\s*remaining/)
+        ? plainOutput.match(/Amp Free:\s*\$([\d.]+)\/\$([\d.]+)\s*remaining/)
         : null
-      const paidMatch = output.match(/Individual credits:\s*(-?)\$([\d.]+)\s*remaining/)
+      const paidMatch = plainOutput.match(/Individual credits:\s*(-?)\$([\d.]+)\s*remaining/)
 
       const parts: string[] = []
-      if (subscriptionMatch) {
+      const subscriptionUsage = subscriptionUsageMatch || legacySubscriptionUsageMatch
+      if (subscriptionMatch && subscriptionUsage) {
         parts.push(subscriptionMatch[1])
-        parts.push(`Other: ${subscriptionMatch[2]}%`)
-        parts.push(`Orb: ${subscriptionMatch[3]}%`)
+        parts.push(`Agent: ${subscriptionUsage[1]}%`)
+        parts.push(`Orb: ${subscriptionUsage[2]}%`)
       } else if (freePercentMatch) {
         parts.push(`Free: ${freePercentMatch[1]}%`)
       } else if (freeAmountMatch) {

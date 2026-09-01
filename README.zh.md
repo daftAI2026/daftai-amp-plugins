@@ -72,13 +72,13 @@ cp plugins/daftai-usage-monitor/usage-monitor.ts /path/to/your/project/.amp/plug
 
 | 插件 | 描述 |
 |------|------|
-| [usage-monitor](plugins/daftai-usage-monitor/usage-monitor.ts) | 自动显示 Amp 订阅套餐及 Other/Orb 剩余额度，并在每次 agent 回合结束后刷新。 |
+| [usage-monitor](plugins/daftai-usage-monitor/usage-monitor.ts) | 自动显示 Amp 订阅套餐及 Agent/Orb 剩余额度，并在每次 agent 回合结束后刷新。 |
 
 ### usage-monitor
 
 支持 macOS、Linux 和 Windows。插件加载后，你的额度信息会自动显示在支持状态项的 Amp 界面中，并在每次 agent 回合结束后保持刷新。如果当前界面不支持状态项，插件会在 agent 回合结束后回退为通知显示。
 
-订阅用户会看到套餐名称及两个额度池，例如 `Megawatt · Other: 95% · Orb: 100%`。插件仍兼容旧版 Amp Free 百分比、金额额度及付费余额格式。
+订阅用户会看到套餐名称及两个额度池，例如 `Megawatt · Agent: 95% · Orb: 100%`。插件仍兼容旧版订阅、Amp Free 百分比、金额额度及付费余额格式。
 
 https://github.com/user-attachments/assets/873bd095-b9c2-4c39-94f7-02749837babb
 
